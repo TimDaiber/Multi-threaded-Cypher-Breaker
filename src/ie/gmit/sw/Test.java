@@ -10,45 +10,29 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-
-
 public class Test {
-	private Map<String, Double> map = new ConcurrentHashMap<String, Double>();
+	public static Map<String, Double> map = new ConcurrentHashMap<String, Double>();
 	
-	/*public void parse() throws IOException {
-
-		try (BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			String everything = sb.toString();
-		}
-	}*/
-
 	public  void readFromFile() throws IOException {
 
 		String text = "Hello.txt";
+		// Hello contains:
+		// HELLO 12312
+		// BYE 12213
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				new FileInputStream(text), Charset.forName("UTF-8")));
 		
 		while((text = reader.readLine()) != null){
-			// Add each line to the parse
+			// Splits the read line in two where the space char is the separating   
 			String [] stuff = text.split(" ");
+			
 			map.put(stuff[0], Double.parseDouble(stuff[1]) );
-			System.out.println(map);
+			
 		}
-
 	}
 	public static void main(String[] args) throws IOException {
 	Test t = new Test();
 		t.readFromFile();
-		
-		
-		
+		System.out.println(map);
 	}
 }
