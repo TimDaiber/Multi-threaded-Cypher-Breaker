@@ -1,6 +1,6 @@
 package ie.gmit.sw;
 
-public class Result {
+public class Result implements Resultable {
 	private String plainText;
 	private int key;
 	private double score;
@@ -12,26 +12,32 @@ public class Result {
 		this.score = score;
 	}
 
+	@Override
 	public String getPlainText() {
 		return plainText;
 	}
 
+	@Override
 	public void setPlainText(String plainText) {
 		this.plainText = plainText;
 	}
 
+	@Override
 	public int getKey() {
 		return key;
 	}
 
+	@Override
 	public void setKey(int key) {
 		this.key = key;
 	}
 
+	@Override
 	public double getScore() {
 		return score;
 	}
 
+	@Override
 	public void setScore(double score) {
 		this.score = score;
 	}
