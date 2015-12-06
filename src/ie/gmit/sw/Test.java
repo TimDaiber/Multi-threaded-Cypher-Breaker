@@ -32,7 +32,7 @@ public class Test {
 
 	public  void readFromFile() throws IOException {
 
-		String text = "Hello";
+		String text = "Hello.txt";
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				new FileInputStream(text), Charset.forName("UTF-8")));
 		
