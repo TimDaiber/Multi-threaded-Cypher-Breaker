@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Test {
+	
 	public static Map<String, Double> map = new ConcurrentHashMap<String, Double>();
 
 	public void readFromFile() throws IOException {
@@ -32,7 +33,5 @@ public class Test {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		
-	}
+	
 }

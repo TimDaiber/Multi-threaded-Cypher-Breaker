@@ -2,7 +2,7 @@ package ie.gmit.sw;
 
 import java.util.Map;
 
-public class TextScorer {
+public class TextScorer  {
 	private Map<String, Double> map = null;
 	
 	public TextScorer(Map<String, Double> m){
