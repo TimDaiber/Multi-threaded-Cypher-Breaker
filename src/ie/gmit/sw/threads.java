@@ -40,7 +40,7 @@ public class threads {
 	
 	public void eat() throws Exception{
 		loadedmap = qgm.readFromFile();
-		for (int i = 0; i < calculateThreads(); i++) {
+		for (int i = 0; i < txs.getText().length(); i++) {
 			new Thread(new DecryptionThreads(queue, encryptedText, i, (ConcurrentHashMap<String, Double>) loadedmap)).start();
 		}
 		
