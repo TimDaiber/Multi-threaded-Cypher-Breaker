@@ -10,13 +10,13 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Test {
+public class loadmap {
 	
 	public static Map<String, Double> map = new ConcurrentHashMap<String, Double>();
 
 	public void readFromFile() throws IOException {
 
-		String text = "Hello.txt";
+		String text = "4grams.txt";
 		// Hello contains:
 		// HELLO 12312
 		// BYE 12213
