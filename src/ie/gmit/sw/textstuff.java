@@ -8,7 +8,7 @@ public class textstuff {
 	
 	public void setText(){
 	
-	System.out.println("Pleaseinput your passphrase");
+	System.out.println("Pleaseinput your to be decrypted message: ");
 	// Gets user Input
 	Scanner in = new Scanner(System.in);
 	passphrase = in.nextLine().toUpperCase();

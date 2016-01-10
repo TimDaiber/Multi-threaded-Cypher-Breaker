@@ -48,9 +48,9 @@ public class RailFence {
 	}
 	
 	//***** Decrypt a String cypherText using an integer key ***** 
-	public String decrypt(String cypherText, int key){
+	public String decrypt(String encryptedText, int key){
 		//Declare a 2D array of key rows and text length columns
-		char[][] matrix = new char[key][cypherText.length()]; //The array is filled with chars with initial values of zero, i.e. '0'.
+		char[][] matrix = new char[key][encryptedText.length()]; //The array is filled with chars with initial values of zero, i.e. '0'.
 		
 		//Fill the array
 		int targetRow = 0;
@@ -58,9 +58,9 @@ public class RailFence {
 		do{
 			int row = 0; //Used to keep track of rows		
 			boolean down = true; //Used to zigzag
-			for (int i = 0; i < cypherText.length(); i++){ //Loop over the plaintext
+			for (int i = 0; i < encryptedText.length(); i++){ //Loop over the plaintext
 				if (row == targetRow){
-					matrix[row][i] = cypherText.charAt(index); //Add the next character in the plaintext to the array
+					matrix[row][i] = encryptedText.charAt(index); //Add the next character in the plaintext to the array
 					index++;
 				}
 				

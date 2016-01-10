@@ -12,6 +12,15 @@ public class Result implements Resultable {
 		this.score = score;
 	}
 
+	public void printResult(){
+		System.out.println("PlainText: " + this.plainText);
+		System.out.println("Score: " + this.score);
+		System.out.println("Key: " + this.key);
+		System.out.println("\n");
+	}
+	
+	
+	
 	@Override
 	public String getPlainText() {
 		return plainText;
