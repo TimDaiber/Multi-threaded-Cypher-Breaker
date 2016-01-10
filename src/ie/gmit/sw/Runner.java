@@ -19,6 +19,8 @@ public class Runner {
 		System.out.println(encryptionKey);
 		String encryptedString = new RailFence().encrypt(ts.getText(), encryptionKey);
 		System.out.println(encryptedString);
+		
+		
 		//Test t = new Test();
 		//QuadGramMap qg = new QuadGramMap();
 		//qg.readFromFile();
@@ -28,7 +30,7 @@ public class Runner {
 		//threadstuff.createThreads();
 		//threadstuff.takeThread();
 		//hiiamjack
-		System.out.println(threadstuff.getNewPlainText());
+		//System.out.println(threadstuff.getNewPlainText());
 
 	}
 

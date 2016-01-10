@@ -35,6 +35,17 @@ public class DecryptionThreads implements Runnable {
 		this.queue = queue;
 	}
 
+	public DecryptionThreads(BlockingQueue<Resultable> queue2,
+			String encryptedText2, int i,
+			ConcurrentHashMap<String, Double> loadedmap) {
+		// TODO Auto-generated constructor stub
+		
+		this.queue = queue2;
+		this.encryptedText=encryptedText2;
+		this.key= i;
+		this.quadGram = loadedmap;
+	}
+
 	public void run(){
 		
 		newPlainText = rf.decrypt(encryptedText, key);

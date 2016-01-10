@@ -14,7 +14,7 @@ public class QuadGramMap {
 	public static final int GRAM_SIZE = 4;
 	public static Map<String, Double> map = new ConcurrentHashMap<String, Double>();
 
-	public void readFromFile() throws IOException {
+	public Map<String, Double> readFromFile() throws IOException {
 
 		String text = "4grams.txt";
 		// Hello contains:
@@ -30,7 +30,9 @@ public class QuadGramMap {
 
 			map.put(stuff[0], Double.parseDouble(stuff[1]));
 
+			
 		}
+		return map;
 	}
 
 	
