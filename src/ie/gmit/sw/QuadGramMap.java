@@ -8,18 +8,14 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 public class QuadGramMap {
-	// test hgjkh lets see
+
 	public static final int GRAM_SIZE = 4;
 	public static Map<String, Double> map = new ConcurrentHashMap<String, Double>();
 
 	public Map<String, Double> readFromFile() throws IOException {
 
 		String text = "4grams.txt";
-		// Hello contains:
-		// HELLO 12312
-		// BYE 12213
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				new FileInputStream(text), Charset.forName("UTF-8")));
 
@@ -30,10 +26,8 @@ public class QuadGramMap {
 
 			map.put(stuff[0], Double.parseDouble(stuff[1]));
 
-			
 		}
 		return map;
 	}
 
-	
 }

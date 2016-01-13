@@ -10,21 +10,17 @@ public class threads {
 
 	QuadGramMap qgm = new QuadGramMap();
 	textstuff txs = new textstuff();
-	// int capacity;
 	private String encryptedText;
 	Map<String, Double> loadedmap = new ConcurrentHashMap<String, Double>();
 	private Result result;
 	private int numberOfThreads;
 	private volatile boolean running = true;
-	BlockingQueue<Resultable> queue; // = new
-										// ArrayBlockingQueue<Resultable>(capacity);
+	BlockingQueue<Resultable> queue;
 
-	// ---------------------------------------------will
 	private volatile int counter = 0;
 	Object lock = new Object();
 	private int MAX_QUEUE_SIZE;
 
-	// ---------------------------------------------will
 	public threads(String encryptedString) throws Exception {
 
 		queue = new ArrayBlockingQueue<Resultable>(calculateThreads());
@@ -41,41 +37,33 @@ public class threads {
 		return numberOfThreads;
 	}
 
-	public void eat() throws Exception{
+	public void eat() throws Exception {
 		loadedmap = qgm.readFromFile();
-		for (int i = 2; i < txs.getText().length()/2; i++) {
-			new Thread(new DecryptionThreads(queue, encryptedText, i, (ConcurrentHashMap<String, Double>) loadedmap)).start();
+		for (int i = 2; i < txs.getText().length() / 2; i++) {
+			new Thread(new DecryptionThreads(queue, encryptedText, i,
+					(ConcurrentHashMap<String, Double>) loadedmap)).start();
 		}
-		
-		Thread t = new Thread(new Runnable(){
+
+		Thread t = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				while(running){
-				try{
-					result = (Result) queue.take();
-					
-					result.printResult();
-				
-					increment();
-					poisonTime pt = new poisonTime();
-					
-					pt.nowtimer();
-					System.out.println(pt.checkelapsedTime());
-					
-					//if(pt.checkelapsedTime()>3){
-					endqueue();
-				//}
-					
-				}catch(Exception e){
-					e.printStackTrace();
+				while (running) {
+					try {
+						result = (Result) queue.take();
+
+						result.printResult();
+
+						increment();
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
-			}
-			
 		});
-		t.start(); // Start thread
+		t.start();
 		t.join();
 		endqueue();
 	}

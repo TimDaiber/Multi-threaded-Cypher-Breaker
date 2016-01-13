@@ -1,16 +1,12 @@
 package ie.gmit.sw;
 
-//import java.util.concurrent.ArrayBlockingQueue;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DecryptionThreads implements Runnable {
 
-	//double topScore;
-	//private int numberOfThreads;
-	//private String newPlainText;
-	// private double score;
-	//textstuff txs = new textstuff();
+	
 	private int key;
 	private String encryptedText;
 	private Result result;	
