@@ -17,14 +17,16 @@ public class threads implements Threadable {
 	private volatile boolean running = true;
 	BlockingQueue<Resultable> queue;
 
-	private volatile int counter = 0;
+	TopResult tps = new TopResult();
+	private volatile int counter;
 	Object lock = new Object();
-	private int MAX_QUEUE_SIZE;
+	private int threadCount = 24;
 
 	public threads(String encryptedString) throws Exception {
 
-		queue = new ArrayBlockingQueue<Resultable>(calculateThreads());
+		queue = new ArrayBlockingQueue<Resultable>(threadCount);
 		this.encryptedText = encryptedString;
+		// calculateThreads();
 		eat();
 	}
 
@@ -41,9 +43,10 @@ public class threads implements Threadable {
 	@Override
 	public void eat() throws Exception {
 		loadedmap = qgm.readFromFile();
-		for (int i = 2; i < txs.getText().length() / 2; i++) {
+		for (int i = 2; i < threadCount; i++) {
 			new Thread(new DecryptionThreads(queue, encryptedText, i,
 					(ConcurrentHashMap<String, Double>) loadedmap)).start();
+
 		}
 
 		Thread t = new Thread(new Runnable() {
@@ -54,11 +57,29 @@ public class threads implements Threadable {
 				while (running) {
 					try {
 						result = (Result) queue.take();
-
 						result.printResult();
 
-						increment();
+						if (tps.getTopReult() <= result.getScore()) {
+							System.out.println("Is this thing on?");
+							// tp.setTopReult() =result.getScore();
+							tps.setTopReult(result.getScore());
+							tps.setTopMessage(result.getPlainText());
+							tps.setTopKey(result.getKey());
+						}
 
+						result.checkstuff();
+
+						System.out.println(counter);
+
+						System.out.println("Message: " + tps.getTopMessage());
+						System.out.println("Key: " + tps.getTopKey());
+						System.out.println("Score: " + tps.getTopReult());
+
+						increment();
+						// hellomyfriend
+
+						topresult();
+						// endqueue();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -72,27 +93,16 @@ public class threads implements Threadable {
 
 	// ---------------------------------------------will
 	@Override
-	public void increment() throws InterruptedException {
-		synchronized (lock) {
-			counter++;
-			if (counter == MAX_QUEUE_SIZE) {
-				// queue.put(new PoisonResult(result.getPlainText(),
-				// result.getKey(), result.getScore()));
+	public synchronized void increment() {
+		counter++;
+		if (counter == threadCount) {
+			endqueue();
 
-				System.out.println("MAX QUEUE SIZE Reached "
-						+ calculateThreads());
-				System.out.println("Counter count: " + counter);
-
-				// queue.put((Resultable) new
-				// PoisonResult(poisonResult.getPoisonPlaintext(),
-				// poisonResult.getPoisonKey(), poisonResult.getPoisonScore()));
-				// queue.put(poisonResult.printPoisonResult());
-
-				/*
-				 * poisonResult.shutDown(); shutDown(); running = false;
-				 */
-			}
 		}
+	}
+
+	public synchronized void topresult() {
+
 	}
 
 	// ---------------------------------------------will

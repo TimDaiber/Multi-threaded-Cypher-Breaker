@@ -17,6 +17,7 @@ public class Result implements Resultable {
 		System.out.println("Score: " + this.score);
 		System.out.println("Key: " + this.key);
 		System.out.println("\n");
+
 	}
 
 	@Override
@@ -47,5 +48,16 @@ public class Result implements Resultable {
 	@Override
 	public void setScore(double score) {
 		this.score = score;
+	}
+
+	public void checkstuff() {
+		TopResult tp = new TopResult();
+		if (tp.getTopReult() < this.score) {
+			System.out.println("Is this thing on?");
+			// tp.setTopReult() =result.getScore();
+			tp.setTopReult(this.score);
+			tp.setTopMessage(this.plainText);
+			tp.setTopKey(this.key);
+		}
 	}
 }

@@ -10,8 +10,10 @@ public class Runner {
 		ts.setText();
 		String mymessage = ts.getText();
 		System.out.println(mymessage);
+		int quickint = mymessage.length();
+		// hellomynameisearl
 
-		int encryptionKey = (int) (Math.floor(Math.random() * 12) + 2);
+		int encryptionKey = (int) (Math.floor(Math.random() * (24)) + 1);
 		System.out.println(encryptionKey);
 		String encryptedString = new RailFence().encrypt(mymessage,
 				encryptionKey);
@@ -19,20 +21,11 @@ public class Runner {
 
 		Threadable threads = new threads(encryptedString);
 		threads.endqueue();
-		// threads.calculateThreads();
-		// threads.eat();
-		// threads.endqueue();
-		// Test t = new Test();
-		// QuadGramMap qg = new QuadGramMap();
-		// qg.readFromFile();
 
-		// System.out.println(qg.map);
-
-		// threadstuff.createThreads();
-		// threadstuff.takeThread();
-		// hiiamjack
-		// System.out.println(threadstuff.getNewPlainText());
-
+		TopResult tps = new TopResult();
+		System.out.println("Message: " + tps.getTopMessage());
+		System.out.println("Key: " + tps.getTopKey());
+		System.out.println("Score: " + tps.getTopReult());
 	}
 
 }
