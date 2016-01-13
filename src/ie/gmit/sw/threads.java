@@ -10,37 +10,40 @@ public class threads {
 
 	QuadGramMap qgm = new QuadGramMap();
 	textstuff txs = new textstuff();
-	//int capacity;
+	// int capacity;
 	private String encryptedText;
 	Map<String, Double> loadedmap = new ConcurrentHashMap<String, Double>();
 	private Result result;
 	private int numberOfThreads;
 	private volatile boolean running = true;
-	BlockingQueue<Resultable> queue; //= new ArrayBlockingQueue<Resultable>(capacity);
-	
-	//---------------------------------------------will
+	BlockingQueue<Resultable> queue; // = new
+										// ArrayBlockingQueue<Resultable>(capacity);
+
+	// ---------------------------------------------will
 	private volatile int counter = 0;
 	Object lock = new Object();
 	private int MAX_QUEUE_SIZE;
-	//---------------------------------------------will
-	public threads(String encryptedString) throws Exception{
-		
+
+	// ---------------------------------------------will
+	public threads(String encryptedString) throws Exception {
+
 		queue = new ArrayBlockingQueue<Resultable>(calculateThreads());
 		this.encryptedText = encryptedString;
 		eat();
 	}
+
 	public int calculateThreads() {
 		int textSize = txs.getText().length();
 		if (textSize > 2) {
 			numberOfThreads = textSize / 2;
-			
+
 		}
 		return numberOfThreads;
 	}
-	
+
 	public void eat() throws Exception{
 		loadedmap = qgm.readFromFile();
-		for (int i = 0; i < txs.getText().length(); i++) {
+		for (int i = 2; i < txs.getText().length()/2; i++) {
 			new Thread(new DecryptionThreads(queue, encryptedText, i, (ConcurrentHashMap<String, Double>) loadedmap)).start();
 		}
 		
@@ -56,8 +59,14 @@ public class threads {
 					result.printResult();
 				
 					increment();
+					poisonTime pt = new poisonTime();
 					
-				
+					pt.nowtimer();
+					System.out.println(pt.checkelapsedTime());
+					
+					//if(pt.checkelapsedTime()>3){
+					endqueue();
+				//}
 					
 				}catch(Exception e){
 					e.printStackTrace();
@@ -70,28 +79,33 @@ public class threads {
 		t.join();
 		endqueue();
 	}
-	//---------------------------------------------will
-	public void increment() throws InterruptedException{
+
+	// ---------------------------------------------will
+	public void increment() throws InterruptedException {
 		synchronized (lock) {
 			counter++;
-			if(counter == MAX_QUEUE_SIZE){
-			    // queue.put(new PoisonResult(result.getPlainText(), result.getKey(), result.getScore()));
-				
-				System.out.println("MAX QUEUE SIZE Reached " + calculateThreads());
+			if (counter == MAX_QUEUE_SIZE) {
+				// queue.put(new PoisonResult(result.getPlainText(),
+				// result.getKey(), result.getScore()));
+
+				System.out.println("MAX QUEUE SIZE Reached "
+						+ calculateThreads());
 				System.out.println("Counter count: " + counter);
-				
-				
-				// queue.put((Resultable) new PoisonResult(poisonResult.getPoisonPlaintext(), poisonResult.getPoisonKey(), poisonResult.getPoisonScore()));	
+
+				// queue.put((Resultable) new
+				// PoisonResult(poisonResult.getPoisonPlaintext(),
+				// poisonResult.getPoisonKey(), poisonResult.getPoisonScore()));
 				// queue.put(poisonResult.printPoisonResult());
-				
-		/*		poisonResult.shutDown();
-				shutDown();
-				running = false;*/
+
+				/*
+				 * poisonResult.shutDown(); shutDown(); running = false;
+				 */
 			}
 		}
 	}
-	//---------------------------------------------will
-	public void endqueue(){
+
+	// ---------------------------------------------will
+	public void endqueue() {
 		running = false;
 	}
 }

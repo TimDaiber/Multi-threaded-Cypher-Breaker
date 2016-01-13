@@ -48,6 +48,7 @@ public class threadstuff {
 			});
 				t.start();
 				queue.put(t);
+				queue.clear();
 		}
 		//poison();
 	}

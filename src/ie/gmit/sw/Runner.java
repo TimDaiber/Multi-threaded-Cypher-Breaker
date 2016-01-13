@@ -3,7 +3,9 @@ package ie.gmit.sw;
 //import java.io.IOException;
 
 public class Runner {
-
+	public static long startTime;
+	public static long endTime;
+	public static long Time;
 	public static void main(String[] args) throws Exception {
 		//threadstuff threadstuff = new threadstuff();
 		
@@ -14,7 +16,9 @@ public class Runner {
 		String mymessage = ts.getText();
 		System.out.println(mymessage);
 
-		int encryptionKey = (int) (Math.floor(Math.random() * 12) );
+		poisonTime pt = new poisonTime();
+		pt.starttimer();
+		int encryptionKey = (int) (Math.floor(Math.random() * 12)+2 );
 		System.out.println(encryptionKey);
 		String encryptedString = new RailFence().encrypt(mymessage, encryptionKey);
 		System.out.println(encryptedString);
