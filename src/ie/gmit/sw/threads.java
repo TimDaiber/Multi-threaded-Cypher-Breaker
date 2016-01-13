@@ -6,9 +6,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class threads {
+public class threads implements Threadable {
 
-	QuadGramMap qgm = new QuadGramMap();
+	QuadGramable qgm = new QuadGramMap();
 	textstuff txs = new textstuff();
 	private String encryptedText;
 	Map<String, Double> loadedmap = new ConcurrentHashMap<String, Double>();
@@ -28,6 +28,7 @@ public class threads {
 		eat();
 	}
 
+	@Override
 	public int calculateThreads() {
 		int textSize = txs.getText().length();
 		if (textSize > 2) {
@@ -37,6 +38,7 @@ public class threads {
 		return numberOfThreads;
 	}
 
+	@Override
 	public void eat() throws Exception {
 		loadedmap = qgm.readFromFile();
 		for (int i = 2; i < txs.getText().length() / 2; i++) {
@@ -69,6 +71,7 @@ public class threads {
 	}
 
 	// ---------------------------------------------will
+	@Override
 	public void increment() throws InterruptedException {
 		synchronized (lock) {
 			counter++;
@@ -93,6 +96,7 @@ public class threads {
 	}
 
 	// ---------------------------------------------will
+	@Override
 	public void endqueue() {
 		running = false;
 	}

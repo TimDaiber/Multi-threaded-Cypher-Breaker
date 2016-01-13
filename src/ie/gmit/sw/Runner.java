@@ -3,9 +3,6 @@ package ie.gmit.sw;
 //import java.io.IOException;
 
 public class Runner {
-	public static long startTime;
-	public static long endTime;
-	public static long Time;
 
 	public static void main(String[] args) throws Exception {
 
@@ -20,7 +17,7 @@ public class Runner {
 				encryptionKey);
 		System.out.println(encryptedString);
 
-		threads threads = new threads(encryptedString);
+		Threadable threads = new threads(encryptedString);
 		threads.endqueue();
 		// threads.calculateThreads();
 		// threads.eat();

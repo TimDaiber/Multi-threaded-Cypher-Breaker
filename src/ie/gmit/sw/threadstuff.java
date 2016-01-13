@@ -53,6 +53,70 @@ public class threadstuff {
 		//poison();
 	}
 
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+
+	public double getTopScore() {
+		return topScore;
+	}
+
+	public void setTopScore(double topScore) {
+		this.topScore = topScore;
+	}
+
+	public int getNumberOfThreads() {
+		return numberOfThreads;
+	}
+
+	public void setNumberOfThreads(int numberOfThreads) {
+		this.numberOfThreads = numberOfThreads;
+	}
+
+	public Textable getTxs() {
+		return txs;
+	}
+
+	public void setTxs(Textable txs) {
+		this.txs = (textstuff) txs;
+	}
+
+	public RailFence getRf() {
+		return rf;
+	}
+
+	public void setRf(RailFence rf) {
+		this.rf = rf;
+	}
+
+	public TextScorer getTs() {
+		return ts;
+	}
+
+	public void setTs(TextScorer ts) {
+		this.ts = ts;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public BlockingQueue<Thread> getQueue() {
+		return queue;
+	}
+
+	public void setQueue(BlockingQueue<Thread> queue) {
+		this.queue = queue;
+	}
+
 	/*public void poison(){
 		if(queue.){
 			

@@ -8,11 +8,11 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class QuadGramMap {
+public class QuadGramMap implements QuadGramable {
 
-	public static final int GRAM_SIZE = 4;
 	public static Map<String, Double> map = new ConcurrentHashMap<String, Double>();
 
+	@Override
 	public Map<String, Double> readFromFile() throws IOException {
 
 		String text = "4grams.txt";

@@ -13,9 +13,9 @@ public class TextScorer {
 		double score = 0f;
 
 		for (int i = 0; i < text.length(); i++) {
-			if (i + QuadGramMap.GRAM_SIZE <= text.length() - 1) {
+			if (i + QuadGramable.GRAM_SIZE <= text.length() - 1) {
 				score += computeLogScore(text.substring(i, i
-						+ QuadGramMap.GRAM_SIZE));
+						+ QuadGramable.GRAM_SIZE));
 			}
 		}
 		return score;
